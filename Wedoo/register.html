@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page d'Enregistrement</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #registration-form-container {
+            text-align: center;
+            margin-top: 20px; /* Espacement du titre */
+        }
+
+        h1 {
+            margin-bottom: 20px; /* Espacement du titre */
+        }
+
+        #registration-form {
+            display: inline-block;
+            text-align: left;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input, button {
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 auto;
+            display: block; /* Pour centrer le bouton horizontalement */
+        }
+
+        #Username, #password, #email, #tel, #confirm-password {
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+
+        #password-strength {
+            font-size: 14px;
+            color: #888;
+        }
+
+    </style>
+</head>
+<body>
+<h1>Locars</h1>
+<div id="registration-form-container">
+    <a href="/accueil" style="text-decoration: none;">
+        <button type="button">Retour</button>
+    </a>
+
+    <form id="registration-form" method="post" action="/register">
+        <input type="email" name="email" id="email" placeholder="Email" required>
+        <br>
+        <input type="text" name="username" id="Username" placeholder="Username" required>
+        <br>
+        <input type="tel" name="tel" id="tel" placeholder="Télèphone" required>
+        <br>
+        <input type="password" name="password" id="password" placeholder="Password" required>
+        <br>
+        <span id="password-strength"></span>
+        <br>
+        <input type="password" name="confirmpassword" id="confirm-password" placeholder="Confirm Password" required>
+        <br>
+        <button type="submit" id="submit-button" disabled>S'inscrire</button>
+    </form>
+</div>
+
+<script>
+    const passwordInput = document.getElementById('password');
+    const passwordStrength = document.getElementById('password-strength');
+    const submitButton = document.getElementById('submit-button');
+
+    passwordInput.addEventListener('input', function () {
+        const password = passwordInput.value;
+
+        // Vérification de la longueur
+        const isLengthValid = password.length >= 8 && password.length <= 30;
+
+        // Vérification de la présence d'au moins un chiffre
+        const hasNumber = /\d/.test(password);
+
+        // Vérification de la présence d'au moins une lettre minuscule
+        const hasLowerCase = /[a-z]/.test(password);
+
+        // Vérification de la présence d'au moins une lettre majuscule
+        const hasUpperCase = /[A-Z]/.test(password);
+
+        // Vérification de la présence d'au moins un caractère spécial
+        const hasSpecialChar = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(password);
+
+        // Affichage de la force du mot de passe
+        if (isLengthValid && hasNumber && hasLowerCase && hasUpperCase && hasSpecialChar) {
+            passwordStrength.textContent = 'Force du mot de passe : Fort';
+            passwordStrength.style.color = 'green';
+            submitButton.disabled = false;
+        } else {
+            passwordStrength.textContent = 'Force du mot de passe : Faible';
+            passwordStrength.style.color = 'red';
+            submitButton.disabled = true;
+        }
+    });// Ajoute ce script dans ta page salut.html
+    document.addEventListener('DOMContentLoaded', function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const message = urlParams.get('message');
+
+        if (message) {
+            alert(message); // Tu peux remplacer alert par un autre moyen d'affichage (comme un élément HTML).
+        }
+    });
+
+</script>
+
+</body>
+</html>

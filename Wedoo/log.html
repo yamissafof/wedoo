@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page de Login</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #login-form-container {
+            text-align: center;
+            margin-top: 20px; /* Espacement du titre */
+        }
+
+        h1 {
+            margin-bottom: 20px; /* Espacement du titre */
+        }
+
+        #login-form {
+            display: inline-block;
+            text-align: left;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #username, #password {
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 auto;
+            display: block; /* Pour centrer le bouton horizontalement */
+        }
+    </style>
+</head>
+<body>
+
+<h1>Locars</h1>
+
+<div id="login-form-container">
+    <a href="/accueil" style="text-decoration: none;">
+        <button type="button">Retour</button>
+    </a>
+
+    <form id="login-form" action="/login" method="post">
+        <input type="text" id="username" name="username" placeholder="Nom d'utilisateur" required>
+        <br>
+        <input type="password" id="password" name="password" placeholder="Mot de passe" required>
+        <br>
+        <button type="submit" value="Soumettre">Se connecter</button>
+    </form>
+</div>
+<script>
+    // Ajoute ce script dans ta page log.html
+    document.addEventListener('DOMContentLoaded', function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const message = urlParams.get('message');
+
+        if (message) {
+            alert(message); // Tu peux remplacer alert par un autre moyen d'affichage (comme un élément HTML).
+        }
+    });
+
+</script>
+</body>
+</html>
